@@ -38,14 +38,15 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_core)
 # _Target
 
 # Resource
-if(IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/resource")
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_CURRENT_SOURCE_DIR}/resource"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
-        COMMENT "Copying resources to build directory..."
-    )
-endif()
+# Uncommit to copy all files from resource/ to build directory.
+#if(IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/resource")
+#    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_directory
+#        "${CMAKE_CURRENT_SOURCE_DIR}/resource"
+#        "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+#        COMMENT "Copying resources to build directory..."
+#    )
+#endif()
 # _Resource
 
 # Testing
