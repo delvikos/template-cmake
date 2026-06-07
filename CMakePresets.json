@@ -121,5 +121,51 @@
                 "CMAKE_PREFIX_PATH": "/usr/include;/usr/lib/aarch64-linux-gnu"
             }
         }
+    ],
+    "buildPresets": [
+        {
+            "name": "base-build",
+            "hidden": true
+        },
+        {
+            "name": "x64-debug",
+            "inherits": "base-build",
+            "configurePreset": "x64-debug"
+        },
+        {
+            "name": "x64-release",
+            "inherits": "base-build",
+            "configurePreset": "x64-release"
+        },
+        {
+            "name": "x86-debug",
+            "inherits": "base-build",
+            "configurePreset": "x86-debug"
+        },
+        {
+            "name": "x86-release",
+            "inherits": "base-build",
+            "configurePreset": "x86-release"
+        },
+        {
+            "name": "linux-debug-x86_64",
+            "inherits": "base-build",
+            "configurePreset": "linux-debug-x86_64"
+        },
+        {
+            "name": "linux-release-x86_64",
+            "inherits": "base-build",
+            "configurePreset": "linux-release-x86_64"
+        },
+        {
+            "name": "linux-debug-arm64",
+            "inherits": "base-build",
+            "configurePreset": "linux-debug-arm64"
+        },
+        {
+            "name": "linux-release-arm64",
+            "inherits": "base-build",
+            "configurePreset": "linux-release-arm64"
+        }
     ]
 }
