@@ -57,7 +57,8 @@ if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
         #
         #
         
-        add_executable(ProjectTests ${TEST_FILES} ${PROJECT_NAME}_core)
+        add_executable(${PROJECT_NAME}_tests ${TEST_FILES})
+	    target_link_libraries(${PROJECT_NAME}_tests PRIVATE ${PROJECT_NAME}_core)
         
         # Also link extern sources if tests need them.
         # target_link_libraries(ProjectTests PRIVATE ...)
