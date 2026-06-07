@@ -18,7 +18,7 @@ endif()
 
 # Dependencies
 # find_package()
-# FetchContent()
+include(FetchContent)
 # add_subdirectory("external")
 #
 # target_link_libraries(${PROJECT_NAME} PRIVATE my_lib_target_name)
