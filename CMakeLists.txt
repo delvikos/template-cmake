@@ -55,7 +55,7 @@ if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
         add_executable(ProjectTests ${TEST_FILES})
         target_include_directories(ProjectTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
         
-        # Если тесты используют общие исходники, линкуем их или добавляем библиотеку
+        # Also link extern sources tests use them.
         # target_link_libraries(ProjectTests PRIVATE ...)
         
         add_test(NAME AllTests COMMAND ProjectTests)
