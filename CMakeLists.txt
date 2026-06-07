@@ -25,14 +25,16 @@ endif()
 # _Dependencies
 
 # Target
-file(GLOB_RECURSE 
-  SRC_FILES 
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
-)
+file(GLOB_RECURSE ALL_SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
-add_executable(${PROJECT_NAME} ${SRC_FILES})
+set(CORE_SRC_FILES ${ALL_SRC_FILES})
+list(REMOVE_ITEM CORE_SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
 
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+add_library(${PROJECT_NAME}_core STATIC ${CORE_SRC_FILES})
+target_include_directories(${PROJECT_NAME_core} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+add_executable(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
+target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_core)
 # _Target
 
 # Resource
@@ -52,8 +54,10 @@ if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
     file(GLOB_RECURSE TEST_FILES "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp")
     
     if(TEST_FILES)
-        add_executable(ProjectTests ${TEST_FILES})
-        target_include_directories(ProjectTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+        #
+        #
+        
+        add_executable(ProjectTests ${TEST_FILES} ${PROJECT_NAME}_core)
         
         # Also link extern sources if tests need them.
         # target_link_libraries(ProjectTests PRIVATE ...)
