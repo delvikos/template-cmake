@@ -72,7 +72,7 @@ if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
           GIT_TAG        52eb8108c5bdec04579160ae17225d66034bd723 # 1.17.0
         )
         set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
-        set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+        set(gtest_build_tests OFF CACHE BOOL "" FORCE) 
         FetchContent_MakeAvailable(googletest)
         include(GoogleTest)
         
