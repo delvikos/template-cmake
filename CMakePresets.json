@@ -1,0 +1,130 @@
+﻿{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}/cmake-cache",
+            "cacheVariables": {
+                "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/bin",
+                "CMAKE_LIBRARY_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/bin"
+            }
+        },
+        {
+            "name": "windows-base",
+            "inherits": "base",
+            "hidden": true,
+            "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "x64-debug",
+            "displayName": "x64 Debug",
+            "inherits": "windows-base",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_PREFIX_PATH": "$env{VCPKG_ROOT}/installed/x64-windows/include;$env{VCPKG_ROOT}/installed/x64-windows/debug/lib",
+                "CMAKE_LIBRARY_PATH": "$env{VCPKG_ROOT}/installed/x64-windows/debug/lib"
+            }
+        },
+        {
+            "name": "x64-release",
+            "displayName": "x64 Release",
+            "inherits": "x64-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_PREFIX_PATH": "$env{VCPKG_ROOT}/installed/x64-windows/include;$env{VCPKG_ROOT}/installed/x64-windows/lib",
+                "CMAKE_LIBRARY_PATH": "$env{VCPKG_ROOT}/installed/x64-windows/lib",
+                "ISGUI": "WIN32"
+            }
+        },
+        {
+            "name": "x86-debug",
+            "displayName": "x86 Debug",
+            "inherits": "windows-base",
+            "architecture": {
+                "value": "x86",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_PREFIX_PATH": "$env{VCPKG_ROOT}/installed/x86-windows/include;$env{VCPKG_ROOT}/installed/x86-windows/debug/lib",
+                "CMAKE_LIBRARY_PATH": "$env{VCPKG_ROOT}/installed/x86-windows/debug/lib"
+            }
+        },
+        {
+            "name": "x86-release",
+            "displayName": "x86 Release",
+            "inherits": "x86-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_PREFIX_PATH": "$env{VCPKG_ROOT}/installed/x86-windows/include;$env{VCPKG_ROOT}/installed/x86-windows/lib",
+                "CMAKE_LIBRARY_PATH": "$env{VCPKG_ROOT}/installed/x86-windows/lib",
+                "ISGUI": "WIN32"
+            }
+        },
+        {
+            "name": "linux-base",
+            "hidden": true,
+            "inherits": "base",
+            "installDir": "/usr/local/bin",
+            "cacheVariables": {
+                "CMAKE_LIBRARY_PATH": "/usr/lib"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            }
+        },
+        {
+            "name": "linux-debug-x86_64",
+            "displayName": "Linux Debug x86_64",
+            "inherits": "linux-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_PREFIX_PATH": "/usr/include;/usr/lib/x86_64-linux-gnu"
+            }
+        },
+        {
+            "name": "linux-release-x86_64",
+            "displayName": "Linux Release x86_64",
+            "inherits": "linux-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_PREFIX_PATH": "/usr/include;/usr/lib/x86_64-linux-gnu"
+            }
+        },
+        {
+            "name": "linux-debug-arm64",
+            "displayName": "Linux Debug Arm64",
+            "inherits": "linux-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_PREFIX_PATH": "/usr/include;/usr/lib/aarch64-linux-gnu"
+            }
+        },
+        {
+            "name": "linux-release-arm64",
+            "displayName": "Linux Release Arm64",
+            "inherits": "linux-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_PREFIX_PATH": "/usr/include;/usr/lib/aarch64-linux-gnu"
+            }
+        }
+    ]
+}

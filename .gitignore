@@ -1,0 +1,23 @@
+build/
+
+CMakeUserPresets.json
+.cmake/
+
+vcpkg/
+vcpkg_installed/
+.vcpkg/
+
+# Visual Studio (MSVC)
+.vs/
+*.user
+*.suo
+*.sln
+*.vcxproj
+*.filters
+
+# VS Code
+.vscode/
+
+# CLion / JetBrains
+.idea/
+cmake-build-*/
