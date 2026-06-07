@@ -54,16 +54,32 @@ if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
     file(GLOB_RECURSE TEST_FILES "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp")
     
     if(TEST_FILES)
-        #
-        #
-        
-        add_executable(${PROJECT_NAME}_tests ${TEST_FILES})
-	    target_link_libraries(${PROJECT_NAME}_tests PRIVATE ${PROJECT_NAME}_core)
+        ##
+        #add_executable(${PROJECT_NAME}_tests ${TEST_FILES})
+	    #target_link_libraries(${PROJECT_NAME}_tests PRIVATE ${PROJECT_NAME}_core)
         
         # Also link extern sources if tests need them.
-        # target_link_libraries(ProjectTests PRIVATE ...)
+        # target_link_libraries(${PROJECT_NAME}_tests PRIVATE ...)
         
-        add_test(NAME AllTests COMMAND ProjectTests)
+        #add_test(NAME AllTests COMMAND ${PROJECT_NAME}_tests)
+        ##
+
+        # Google Tests template
+        FetchContent_Declare(
+          googletest
+          GIT_REPOSITORY https://github.com/google/googletest.git
+          GIT_TAG        52eb8108c5bdec04579160ae17225d66034bd723 # 1.17.0
+        )
+        set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
+        set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+        FetchContent_MakeAvailable(googletest)
+        include(GoogleTest)
+        
+        add_executable(${PROJECT_NAME}_tests ${TEST_FILES})
+	    target_link_libraries(${PROJECT_NAME}_tests PRIVATE ${PROJECT_NAME}_core gtest_main)
+        
+        gtest_discover_tests(${PROJECT_NAME}_tests)
+        # _Google Tests template
     endif()
 endif()
 # _Testing
