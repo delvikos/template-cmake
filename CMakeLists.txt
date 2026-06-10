@@ -49,7 +49,7 @@ endif()
 # _Resource
 
 # Tests
-if( (${PROJECT_NAME}_build_tests) AND (NOT CMAKE_BUILD_TYPE STREQUAL "Release") )
+if( ${PROJECT_NAME}_build_tests AND (NOT CMAKE_BUILD_TYPE STREQUAL "Release") )
     enable_testing()
 
     # Google Tests template
