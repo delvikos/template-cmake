@@ -167,5 +167,35 @@
             "inherits": "base-build",
             "configurePreset": "linux-release-arm64"
         }
+    ],
+    "testPresets": [
+        {
+            "name": "base-test",
+            "hidden": true,
+            "execution": {
+                "noTestsAction": "ignore",
+                "stopOnFailure": false
+            }
+        },
+        {
+            "name": "x64-debug",
+            "inherits": "base-test",
+            "configurePreset": "x64-debug"
+        },
+        {
+            "name": "x86-debug",
+            "inherits": "base-test",
+            "configurePreset": "x86-debug"
+        },
+        {
+            "name": "linux-debug-x86_64",
+            "inherits": "base-test",
+            "configurePreset": "linux-debug-x86_64"
+        },
+        {
+            "name": "linux-debug-arm64",
+            "inherits": "base-test",
+            "configurePreset": "linux-debug-arm64"
+        }
     ]
 }

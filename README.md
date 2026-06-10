@@ -15,6 +15,9 @@ cmake --preset {preset-name}
 
 # 3. Compile the project
 cmake --build --preset {preset-name}
+
+# 4. Test the project (debug-presets only)
+ctest --preset {preset-name}
 ```
 
 ### Building via IDE
